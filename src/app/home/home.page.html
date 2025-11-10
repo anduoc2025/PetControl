@@ -1,15 +1,19 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <app-header-button></app-header-button>
     <ion-title>PetControl</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <h2>Bienvenido</h2>
+  <p>Gestiona tus mascotas</p>
 
-  <h2>Bienvenido 😺🐶</h2>
-  <p>Gestiona tus mascotas fácilmente</p>
+  <ion-button expand="block" color="primary" (click)="goTo('/nuevamascota')">
+    Agregar mascota
+  </ion-button>
 
-  <ion-button expand="block" routerLink="/add-pet">Agregar Mascota</ion-button>
-  <ion-button expand="block" fill="outline" routerLink="/pets-list">Ver mascotas</ion-button>
-
+  <ion-button expand="block" fill="outline" color="primary" (click)="goTo('/mascotas')">
+    Ver mascotas
+  </ion-button>
 </ion-content>

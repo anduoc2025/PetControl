@@ -35,3 +35,19 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+
+/* Mueve los títulos más a la derecha para no chocar con el logo */
+ion-title {
+  margin-left: 50px;  /* puedes ajustar el número */
+}
+
+
+ion-toolbar {
+  --padding-start: 70px;     /* espacio para el logo */
+}
+
+ion-title {
+  text-align: center;
+}

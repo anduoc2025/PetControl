@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div class="header-container">
+      <img src="assets/img/veterinaria.png" class="logo" (click)="goHome()" />
+
+      <ion-title>Mascotas</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="lista-container" *ngFor="let mascota of mascotas; let i = index">
+    <h3>{{ mascota.nombre }} ({{ mascota.tipo }})</h3>
+    <p>Edad: {{ mascota.edad }} años · Peso: {{ mascota.peso }} kg</p>
+    <p>Raza: {{ mascota.raza }} · Color: {{ mascota.color }}</p>
+    <p><strong>Motivo:</strong> {{ mascota.motivo }}</p>
+
+    <div class="acciones">
+      <span class="editar" (click)="editarMascota(i)">EDITAR</span>
+      <span class="eliminar" (click)="eliminarMascota(i)">ELIMINAR</span>
+    </div>
+
+    <hr />
+  </div>
+
+  <ion-button expand="block" color="primary" (click)="agregarMascota()">
+    AGREGAR MASCOTA
+  </ion-button>
+
+</ion-content>

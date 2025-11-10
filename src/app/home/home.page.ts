@@ -1,36 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AppHeaderButton } from '../components/app-header-button.component';
 
 @Component({
-  selector: 'app-mascotas',
-  templateUrl: './mascotas.page.html',
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  standalone: true,
+  imports: [IonicModule, CommonModule, AppHeaderButton]
 })
-export class MascotasPage implements OnInit {
-  mascotas: any[] = [];
-
+export class HomePage {
   constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.loadPets();
-  }
-
-  loadPets() {
-    try {
-      const raw = localStorage.getItem('pets');
-      this.mascotas = raw ? JSON.parse(raw) : [];
-    } catch {
-      this.mascotas = [];
-    }
-  }
-
-  addSample() {
-    const id = Math.floor(Math.random() * 1000000).toString();
-    const pet = { id, nombre: 'Firulais', tipo: 'Perro', edad: 3, proxVacuna: '2026-02-01' };
-    this.mascotas.push(pet);
-    localStorage.setItem('pets', JSON.stringify(this.mascotas));
-  }
-
-  openPerfil(id: string) {
-    this.router.navigate(['/perfil-mascota', id]);
-  }
+  goTo(path: string) { this.router.navigate([path]); }
 }

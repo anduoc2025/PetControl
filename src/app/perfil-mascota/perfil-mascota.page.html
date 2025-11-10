@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-header-button></app-header-button>
+    <ion-title>Perfil Mascota</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="pet; else noPet">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ pet.nombre }}</ion-card-title>
+        <ion-card-subtitle>{{ pet.tipo }} · {{ pet.edad }} años</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Peso:</strong> {{ pet.peso ?? '-' }} kg</p>
+        <p><strong>Raza:</strong> {{ pet.raza ?? '-' }}</p>
+        <p><strong>Color:</strong> {{ pet.color ?? '-' }}</p>
+        <p><strong>Motivo:</strong> {{ pet.motivo ?? '-' }}</p>
+
+        <ion-button expand="full" color="warning" (click)="editar()">Editar</ion-button>
+        <ion-button expand="full" color="medium" (click)="volver()">Volver</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-template #noPet>
+    <div style="text-align:center; margin-top:40%;">
+      <h3>Mascota no encontrada</h3>
+      <ion-button routerLink="/mascotas">Volver</ion-button>
+    </div>
+  </ng-template>
+</ion-content>

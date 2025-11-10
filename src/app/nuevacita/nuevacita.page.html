@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/mascotas"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isEditMode ? 'Editar Mascota' : 'Nueva Mascota / Cita' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="citaForm" (ngSubmit)="guardarCita()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Tipo (Perro/Gato)</ion-label>
+      <ion-input formControlName="tipo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Edad (años)</ion-label>
+      <ion-input type="number" formControlName="edad"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Próxima vacuna / Fecha</ion-label>
+      <ion-datetime formControlName="fecha"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Notas</ion-label>
+      <ion-input formControlName="descripcion"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="citaForm.invalid">
+      {{ isEditMode ? 'Actualizar Mascota' : 'Guardar Mascota' }}
+    </ion-button>
+  </form>
+</ion-content>
