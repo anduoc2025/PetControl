@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MascotasService, Mascota } from '../services/mascotas.service';
+import { MascotasService, Mascota } from '../services/db.service';
 import { AppHeaderButton } from '../components/app-header-button.component';
 
 @Component({

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MascotasService } from '../services/mascotas.service';
+import { MascotasService } from '../services/db.service';
 import { AppHeaderButton } from '../components/app-header-button.component';
 
 @Component({
