@@ -20,17 +20,17 @@
           <ion-label position="floating">Correo Electrónico</ion-label>
           <ion-input formControlName="correo" type="email" required></ion-input>
         </ion-item>
-        <div *ngIf="loginForm.get('correo').invalid && (loginForm.get('correo').dirty || loginForm.get('correo').touched)" class="error-message">
-          <small *ngIf="loginForm.get('correo').errors.required">El correo es requerido.</small>
-          <small *ngIf="loginForm.get('correo').errors.email">Ingrese un correo válido.</small>
+        <div *ngIf="loginForm.get('correo')?.invalid && (loginForm.get('correo')?.dirty || loginForm.get('correo')?.touched)" class="error-message">
+          <small *ngIf="loginForm.get('correo')?.errors?.['required']">El correo es requerido.</small>
+          <small *ngIf="loginForm.get('correo')?.errors?.['email']">Ingrese un correo válido.</small>
         </div>
 
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input formControlName="pass" type="password" required></ion-input>
         </ion-item>
-        <div *ngIf="loginForm.get('pass').invalid && (loginForm.get('pass').dirty || loginForm.get('pass').touched)" class="error-message">
-          <small *ngIf="loginForm.get('pass').errors.required">La contraseña es requerida.</small>
+        <div *ngIf="loginForm.get('pass')?.invalid && (loginForm.get('pass')?.dirty || loginForm.get('pass')?.touched)" class="error-message">
+          <small *ngIf="loginForm.get('pass')?.errors?.['required']">La contraseña es requerida.</small>
         </div>
 
         <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="ion-margin-top">

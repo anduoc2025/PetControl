@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MascotasService } from '../services/db.service';
+import { DbService } from '../services/db.service';
 import { AppHeaderButton } from '../components/app-header-button.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class EditarPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private svc: MascotasService,
+    private svc: DbService,
     private router: Router,
     private toastCtrl: ToastController
   ) {}
@@ -30,12 +30,9 @@ export class EditarPage implements OnInit {
     this.mascotaForm = this.fb.group({
       id: [m?.id],
       nombre: [m?.nombre || '', Validators.required],
-      tipo: [m?.tipo || '', Validators.required],
+      especie: [m?.especie || '', Validators.required],
       edad: [m?.edad || 0, [Validators.required, Validators.min(0)]],
-      peso: [m?.peso ?? null],
-      raza: [m?.raza || ''],
-      color: [m?.color || ''],
-      motivo: [m?.motivo || '']
+      raza: [m?.raza || '']
     });
   }
 
@@ -46,7 +43,19 @@ export class EditarPage implements OnInit {
       return;
     }
 
-    this.svc.editarMascota(this.mascotaForm.value);
+    const mascotaOriginal = this.svc.getMascotaById(this.id);
+    if (!mascotaOriginal) {
+      const t = await this.toastCtrl.create({ message: 'Error: no se encontró la mascota original', duration: 1200 });
+      await t.present();
+      return;
+    }
+
+    const mascotaEditada = {
+      ...mascotaOriginal,
+      ...this.mascotaForm.value
+    };
+
+    await this.svc.editarMascota(mascotaEditada);
     const t = await this.toastCtrl.create({ message: 'Mascota actualizada', duration: 1000 });
     await t.present();
     this.router.navigate(['/perfil-mascota', this.id]);

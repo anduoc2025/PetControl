@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./home/home.page').then( m => m.HomePage),
@@ -31,16 +30,24 @@ const routes: Routes = [
     loadComponent: () => import('./pages/not-found/not-found.page').then( m => m.NotFoundPage)
   },
   {
+    path: 'mascotas',
+    loadComponent: () => import('./mascotas/mascotas.page').then(m => m.MascotasPage)
+  },
+  {
+    path: 'nuevamascota',
+    loadComponent: () => import('./nuevamascota/nuevamascota.page').then(m => m.NuevamascotaPage)
+  },
+  {
+    path: 'editar/:id',
+    loadComponent: () => import('./editar/editar.page').then(m => m.EditarPage)
+  },
+  {
+    path: 'perfil-mascota/:id',
+    loadComponent: () => import('./perfil-mascota/perfil-mascota.page').then(m => m.PerfilMascotaPage)
+  },
+  {
     path: '**',
     redirectTo: 'not-found',
     pathMatch: 'full'
   }
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

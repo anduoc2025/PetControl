@@ -13,25 +13,27 @@
 
 <ion-content class="ion-padding">
   
-  <div *ngIf="(pacientes | async)?.length === 0" class="ion-text-center empty-state">
-    <ion-icon name="paw-outline"></ion-icon>
-    <p>Aún no tienes mascotas registradas.</p>
-    <p>¡Agrega una para empezar!</p>
-  </div>
+  <ng-container *ngIf="(pacientes | async) as resolvedPacientes">
+    <div *ngIf="resolvedPacientes.length === 0" class="ion-text-center empty-state">
+      <ion-icon name="paw-outline"></ion-icon>
+      <p>Aún no tienes mascotas registradas.</p>
+      <p>¡Agrega una para empezar!</p>
+    </div>
 
-  <ion-list *ngIf="(pacientes | async)?.length > 0">
-    <ion-item-sliding *ngFor="let mascota of (pacientes | async)">
-      <ion-item>
-        <ion-avatar slot="start">
-          <img [src]="mascota.foto || 'assets/img/veterinaria.png'" />
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ mascota.nombre }}</h2>
-          <p>{{ mascota.raza }} - {{ mascota.edad }} años</p>
-        </ion-label>
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
+    <ion-list *ngIf="resolvedPacientes.length > 0">
+      <ion-item-sliding *ngFor="let mascota of resolvedPacientes">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="mascota.foto || 'assets/img/veterinaria.png'" />
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ mascota.nombre }}</h2>
+            <p>{{ mascota.raza }} - {{ mascota.edad }} años</p>
+          </ion-label>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  </ng-container>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="agregarMascota()">
