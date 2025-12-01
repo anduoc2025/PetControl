@@ -7,11 +7,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DbService {
-  private db: SQLiteObject;
+  private db!: SQLiteObject;
   private dbReady = new BehaviorSubject<boolean>(false);
 
   // Observables para los datos
-  private pacientes = new BehaviorSubject([]);
+  private pacientes = new BehaviorSubject<any[]>([]);
 
   constructor(
     private platform: Platform,

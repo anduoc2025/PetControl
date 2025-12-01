@@ -1,0 +1,7 @@
+{
+  "name": "veterinaria-touka",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

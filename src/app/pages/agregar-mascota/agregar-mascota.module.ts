@@ -10,12 +10,8 @@ import { AgregarMascotaPage } from './agregar-mascota.page';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    IonicModule,
     AgregarMascotaPageRoutingModule
   ],
-  declarations: [AgregarMascotaPage]
+  declarations: []
 })
 export class AgregarMascotaPageModule {}

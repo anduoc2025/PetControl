@@ -4,18 +4,22 @@ import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { DbService } from '../../services/db.service';
 import { ApiService } from '../../services/api.service';
-import { ToastController } from '@ionic/angular';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-agregar-mascota',
   templateUrl: './agregar-mascota.page.html',
   styleUrls: ['./agregar-mascota.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, ReactiveFormsModule],
 })
 export class AgregarMascotaPage implements OnInit {
   mascotaForm: FormGroup;
-  razas: Observable<string[]>;
-  fotoSeleccionada: string;
+  razas!: Observable<string[]>;
+  fotoSeleccionada!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -44,7 +48,9 @@ export class AgregarMascotaPage implements OnInit {
         resultType: CameraResultType.DataUrl, // Usar DataUrl para guardarlo directamente en la BD
         source: CameraSource.Camera
       });
-      this.fotoSeleccionada = image.dataUrl;
+      if (image.dataUrl) {
+        this.fotoSeleccionada = image.dataUrl;
+      }
     } catch (error) {
       console.error('Error al tomar la foto', error);
       this.presentToast('No se pudo tomar la foto.');

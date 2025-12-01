@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
-import { ToastController } from '@ionic/angular';
+import { IonicModule, ToastController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, ReactiveFormsModule],
 })
 export class RegistroPage implements OnInit {
   registroForm: FormGroup;
@@ -30,14 +34,14 @@ export class RegistroPage implements OnInit {
   }
 
   passwordMatchValidator(form: FormGroup) {
-    const pass = form.get('pass').value;
-    const confirmPass = form.get('confirmPass').value;
+    const pass = form.get('pass')!.value;
+    const confirmPass = form.get('confirmPass')!.value;
     return pass === confirmPass ? null : { mismatch: true };
   }
 
   registrar() {
     if (this.registroForm.invalid) {
-      if (this.registroForm.errors?.mismatch) {
+      if (this.registroForm.errors?.['mismatch']) {
         this.presentToast('Las contraseñas no coinciden.');
       } else {
         this.presentToast('Por favor, complete todos los campos correctamente.');

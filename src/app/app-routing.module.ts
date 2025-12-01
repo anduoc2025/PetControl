@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    loadComponent: () => import('./home/home.page').then( m => m.HomePage),
     canActivate: [AuthGuard]
   },
   {
@@ -15,20 +15,20 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
   },
   {
     path: 'registro',
-    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+    loadComponent: () => import('./pages/registro/registro.page').then( m => m.RegistroPage)
   },
   {
     path: 'agregar-mascota',
-    loadChildren: () => import('./pages/agregar-mascota/agregar-mascota.module').then( m => m.AgregarMascotaPageModule),
+    loadComponent: () => import('./pages/agregar-mascota/agregar-mascota.page').then( m => m.AgregarMascotaPage),
     canActivate: [AuthGuard]
   },
   {
     path: 'not-found',
-    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+    loadComponent: () => import('./pages/not-found/not-found.page').then( m => m.NotFoundPage)
   },
   {
     path: '**',
