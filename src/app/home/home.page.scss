@@ -1,27 +1,18 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #888;
+  padding: 20px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.empty-state ion-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
 }
 
-#container p {
+.empty-state p {
   font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
 }

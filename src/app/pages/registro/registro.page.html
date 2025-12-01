@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Registro de Usuario</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="registroForm" (ngSubmit)="registrar()">
+        <ion-item>
+          <ion-label position="floating">Nombre Completo</ion-label>
+          <ion-input formControlName="nombre" type="text" required></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input formControlName="correo" type="email" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input formControlName="pass" type="password" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-input formControlName="confirmPass" type="password" required></ion-input>
+        </ion-item>
+        <div *ngIf="registroForm.errors?.mismatch && registroForm.get('confirmPass').touched" class="error-message">
+          <small>Las contraseñas no coinciden.</small>
+        </div>
+
+        <ion-button expand="block" type="submit" [disabled]="registroForm.invalid" class="ion-margin-top">
+          Registrarse
+        </ion-button>
+      </form>
+
+      <ion-button expand="block" fill="clear" (click)="irALogin()">
+        ¿Ya tienes cuenta? Inicia Sesión
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar Nueva Mascota</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="mascotaForm" (ngSubmit)="guardarMascota()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Especie</ion-label>
+      <ion-select formControlName="especie" value="Perro" okText="Ok" cancelText="Cancelar">
+        <ion-select-option value="Perro">Perro</ion-select-option>
+        <!-- Podrías agregar más especies aquí si fuera necesario -->
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Raza</ion-label>
+      <ion-select formControlName="raza" okText="Ok" cancelText="Cancelar" placeholder="Selecciona una raza">
+        <ion-select-option *ngFor="let raza of (razas | async)" [value]="raza">{{ raza }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Edad (años)</ion-label>
+      <ion-input formControlName="edad" type="number" required></ion-input>
+    </ion-item>
+
+    <div class="ion-text-center ion-margin-top">
+      <img [src]="fotoSeleccionada || 'assets/img/veterinaria.png'" alt="Foto de la mascota" class="photo-preview">
+    </div>
+
+    <ion-button expand="block" (click)="tomarFoto()" color="secondary" class="ion-margin-top">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Tomar Foto
+    </ion-button>
+
+    <ion-button expand="block" type="submit" [disabled]="mascotaForm.invalid || !fotoSeleccionada" class="ion-margin-top">
+      Guardar Mascota
+    </ion-button>
+
+  </form>
+</ion-content>
