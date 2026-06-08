@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true" class="login-bg">
+  <div class="login-wrapper">
+    <!-- Logo / encabezado -->
+    <div class="brand">
+      <div class="brand-icon">
+        <ion-icon name="paw"></ion-icon>
+      </div>
+      <h1>PetControl</h1>
+      <p>El carnet digital de tu mascota</p>
+    </div>
+
+    <!-- ion-card: tarjeta del formulario (se anima al entrar) -->
+    <ion-card #loginCard class="login-card">
+      <ion-card-header>
+        <ion-card-title>Iniciar sesión</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <!-- Campo correo -->
+          <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-input
+              label="Correo"
+              labelPlacement="floating"
+              type="email"
+              formControlName="email"
+              placeholder="demo@petcontrol.cl"
+            ></ion-input>
+          </ion-item>
+          <ion-note color="danger" class="error" *ngIf="email?.touched && email?.errors?.['required']">
+            El correo es obligatorio.
+          </ion-note>
+          <ion-note color="danger" class="error" *ngIf="email?.touched && email?.errors?.['email']">
+            Ingresa un correo válido.
+          </ion-note>
+
+          <!-- Campo contraseña -->
+          <ion-item>
+            <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+            <ion-input
+              label="Contraseña"
+              labelPlacement="floating"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="123456"
+            ></ion-input>
+            <ion-button fill="clear" slot="end" (click)="showPassword = !showPassword">
+              <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-note color="danger" class="error" *ngIf="password?.touched && password?.errors?.['required']">
+            La contraseña es obligatoria.
+          </ion-note>
+          <ion-note color="danger" class="error" *ngIf="password?.touched && password?.errors?.['minlength']">
+            Mínimo 6 caracteres.
+          </ion-note>
+
+          <!-- ion-button: botón de acceso -->
+          <ion-button expand="block" type="submit" class="login-btn" [disabled]="loginForm.invalid">
+            <ion-icon name="log-in-outline" slot="start"></ion-icon>
+            Entrar
+          </ion-button>
+        </form>
+
+        <ion-button expand="block" fill="clear" size="small" (click)="goToRegister()">
+          ¿No tienes cuenta? Regístrate
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <p class="hint">Demo: demo&#64;petcontrol.cl &nbsp;/&nbsp; 123456</p>
+  </div>
+</ion-content>

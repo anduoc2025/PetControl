@@ -1,0 +1,35 @@
+.profile-head {
+  text-align: center;
+  margin: 10px 0 18px;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  background: #eaf3f2;
+}
+
+.avatar-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-icon ion-icon {
+  font-size: 52px;
+  color: #1b7b82;
+}
+
+.profile-head h2 {
+  margin: 0;
+  font-weight: 800;
+  color: #103d44;
+}
+
+.profile-head p {
+  margin: 2px 0 0;
+  color: #6b7b80;
+}

@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar Mascota</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="petForm" (ngSubmit)="save()">
+    <!-- Selector de foto (emoji) -->
+    <ion-label class="field-label">Foto</ion-label>
+    <div class="emoji-row">
+      <button
+        type="button"
+        class="emoji"
+        *ngFor="let e of emojis"
+        [class.selected]="petForm.value.photo === e"
+        (click)="selectEmoji(e)"
+      >
+        {{ e }}
+      </button>
+    </div>
+
+    <ion-list lines="full">
+      <ion-item>
+        <ion-input label="Nombre" labelPlacement="floating" formControlName="name" placeholder="Ej: Rocky"></ion-input>
+      </ion-item>
+      <ion-note color="danger" class="error" *ngIf="name?.touched && name?.invalid">
+        El nombre es obligatorio (mínimo 2 caracteres).
+      </ion-note>
+
+      <ion-item>
+        <ion-select label="Especie" labelPlacement="floating" formControlName="species" interface="popover">
+          <ion-select-option value="Perro">Perro</ion-select-option>
+          <ion-select-option value="Gato">Gato</ion-select-option>
+          <ion-select-option value="Otro">Otro</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Raza" labelPlacement="floating" formControlName="breed" placeholder="Ej: Golden Retriever"></ion-input>
+      </ion-item>
+      <ion-note color="danger" class="error" *ngIf="breed?.touched && breed?.invalid">
+        Indica la raza.
+      </ion-note>
+
+      <ion-item>
+        <ion-input label="Edad (años)" labelPlacement="floating" type="number" formControlName="age" placeholder="Ej: 3"></ion-input>
+      </ion-item>
+      <ion-note color="danger" class="error" *ngIf="age?.touched && age?.invalid">
+        Ingresa una edad válida (0 a 40).
+      </ion-note>
+
+      <ion-item>
+        <ion-select label="Sexo" labelPlacement="floating" formControlName="sex" interface="popover">
+          <ion-select-option value="Macho">Macho</ion-select-option>
+          <ion-select-option value="Hembra">Hembra</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Color" labelPlacement="floating" formControlName="color" placeholder="Ej: Dorado"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea
+          label="Enfermedades / alergias"
+          labelPlacement="floating"
+          formControlName="diseases"
+          placeholder="Ej: Alergia a las pulgas"
+          [autoGrow]="true"
+        ></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="petForm.invalid">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      Guardar mascota
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,27 +1,68 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.greeting {
+  margin: 4px 0 0;
+  font-weight: 800;
+  color: #103d44;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.subtitle {
+  margin: 2px 0 14px;
+  color: #6b7b80;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+ion-segment {
+  margin-bottom: 14px;
+}
 
-  color: #8c8c8c;
+.pet-card {
+  border-radius: 16px;
+  margin-inline: 0;
+}
 
+.pet-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pet-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #eaf3f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  flex-shrink: 0;
+}
+
+.pet-info {
+  flex: 1;
+}
+
+.pet-info h3 {
   margin: 0;
+  font-weight: 700;
+  color: #103d44;
 }
 
-#container a {
-  text-decoration: none;
+.pet-info p {
+  margin: 2px 0 6px;
+  color: #6b7b80;
+  font-size: 14px;
+}
+
+.chev {
+  color: #b0c4c2;
+  font-size: 22px;
+}
+
+.empty {
+  text-align: center;
+  color: #9bb0ad;
+  margin-top: 40px;
+}
+
+.empty ion-icon {
+  font-size: 56px;
 }

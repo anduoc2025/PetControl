@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <ion-item>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input label="Nombre" labelPlacement="floating" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-note color="danger" class="error" *ngIf="name?.touched && name?.invalid">
+          Ingresa tu nombre (mínimo 3 caracteres).
+        </ion-note>
+
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input label="Correo" labelPlacement="floating" type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-note color="danger" class="error" *ngIf="email?.touched && email?.invalid">
+          Ingresa un correo válido.
+        </ion-note>
+
+        <ion-item>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input label="Contraseña" labelPlacement="floating" type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-note color="danger" class="error" *ngIf="password?.touched && password?.invalid">
+          Mínimo 6 caracteres.
+        </ion-note>
+
+        <ion-item>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input label="Repetir contraseña" labelPlacement="floating" type="password" formControlName="confirm"></ion-input>
+        </ion-item>
+        <ion-note color="danger" class="error" *ngIf="confirm?.touched && registerForm.errors?.['mismatch']">
+          Las contraseñas no coinciden.
+        </ion-note>
+
+        <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="registerForm.invalid">
+          <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+          Registrarme
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

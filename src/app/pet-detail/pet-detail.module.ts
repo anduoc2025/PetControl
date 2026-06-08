@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
-import { HomePage } from './home.page';
+import { PetDetailPageRoutingModule } from './pet-detail-routing.module';
+import { PetDetailPage } from './pet-detail.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    PetDetailPageRoutingModule,
   ],
-  declarations: [HomePage],
+  declarations: [PetDetailPage],
 })
-export class HomePageModule {}
+export class PetDetailPageModule {}

@@ -1,0 +1,52 @@
+.carnet-bg {
+  --background: #eef5f4;
+}
+
+.carnet {
+  border-radius: 20px;
+  overflow: hidden;
+  opacity: 0; /* arranca invisible; la animación la revela */
+}
+
+.carnet-head {
+  background: linear-gradient(160deg, #1b7b82 0%, #103d44 100%);
+  color: #ffffff;
+  text-align: center;
+  padding: 22px 16px 16px;
+}
+
+.carnet-avatar {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 8px;
+  background: #ffffff;
+}
+
+.emoji-photo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.carnet-head h2 {
+  margin: 4px 0 0;
+  font-weight: 800;
+}
+
+.carnet-head p {
+  margin: 2px 0 8px;
+  color: #cfe8e6;
+}
+
+.not-found {
+  text-align: center;
+  color: #9bb0ad;
+  margin-top: 60px;
+}
+
+.not-found ion-icon {
+  font-size: 60px;
+}

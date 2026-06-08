@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/pet-detail/' + pet?.id"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Vacunas de {{ pet?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Lista de vacunas registradas -->
+  <ion-list *ngIf="pet">
+    <ion-item-divider>
+      <ion-label>Historial de vacunas</ion-label>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let v of pet.vaccines">
+      <ion-icon
+        [name]="v.applied ? 'checkmark-circle' : 'time-outline'"
+        [color]="v.applied ? 'success' : 'warning'"
+        slot="start"
+      ></ion-icon>
+      <ion-label>
+        <h3>{{ v.name }}</h3>
+        <!-- date pipe: formatea la fecha -->
+        <p>{{ v.date | date: 'dd/MM/yyyy' }}</p>
+      </ion-label>
+      <ion-badge [color]="v.applied ? 'success' : 'warning'" slot="end">
+        {{ v.applied ? 'Aplicada' : 'Pendiente' }}
+      </ion-badge>
+    </ion-item>
+
+    <p *ngIf="pet.vaccines.length === 0" class="empty">Aún no hay vacunas registradas.</p>
+  </ion-list>
+
+  <!-- Formulario para agregar vacuna (ion-datetime) -->
+  <ion-card *ngIf="showForm">
+    <ion-card-header>
+      <ion-card-title>Nueva vacuna</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input label="Nombre de la vacuna" labelPlacement="floating" [(ngModel)]="newName"></ion-input>
+      </ion-item>
+      <ion-label class="dt-label">Fecha</ion-label>
+      <ion-datetime
+        presentation="date"
+        [(ngModel)]="newDate"
+        locale="es-CL"
+      ></ion-datetime>
+      <ion-button expand="block" class="ion-margin-top" (click)="addVaccine()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Registrar vacuna
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- ion-fab para mostrar el formulario -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="!showForm">
+    <ion-fab-button color="secondary" (click)="showForm = true">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

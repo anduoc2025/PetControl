@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="profile-head">
+    <ion-avatar class="avatar">
+      <div class="avatar-icon"><ion-icon name="person"></ion-icon></div>
+    </ion-avatar>
+    <!-- Interpolación de los datos del usuario -->
+    <h2>{{ user.name }}</h2>
+    <p>{{ user.email }}</p>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-icon name="paw-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>Mascotas registradas</ion-label>
+        <ion-badge slot="end" color="primary">{{ petCount }}</ion-badge>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-icon name="notifications-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>Recordatorios</ion-label>
+        <ion-toggle slot="end" checked="true"></ion-toggle>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="information-circle-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>Versión</ion-label>
+        <ion-note slot="end">PetControl 1.0</ion-note>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="danger" class="ion-margin-top" (click)="logout()">
+    <ion-icon name="log-out-outline" slot="start"></ion-icon>
+    Cerrar sesión
+  </ion-button>
+</ion-content>

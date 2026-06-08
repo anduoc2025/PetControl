@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Carnet de {{ pet?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding carnet-bg">
+  <!-- Tarjeta del carnet (se anima al entrar) -->
+  <ion-card #carnet class="carnet" *ngIf="pet">
+    <div class="carnet-head">
+      <ion-avatar class="carnet-avatar">
+        <div class="emoji-photo">{{ pet.photo }}</div>
+      </ion-avatar>
+      <h2>{{ pet.name }}</h2>
+      <p>{{ pet.breed }}</p>
+      <ion-chip color="light">Carnet PetControl N° {{ pet.id }}</ion-chip>
+    </div>
+
+    <ion-card-content>
+      <!-- Datos en lista (interpolación) -->
+      <ion-list lines="full">
+        <ion-item>
+          <ion-icon name="paw-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Especie</ion-label>
+          <ion-note slot="end">{{ pet.species }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Edad</ion-label>
+          <ion-note slot="end">{{ pet.age }} año(s)</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="male-female-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Sexo</ion-label>
+          <ion-note slot="end">{{ pet.sex }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="color-palette-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Color</ion-label>
+          <ion-note slot="end">{{ pet.color }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="medkit-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Enfermedades</ion-label>
+          <ion-note slot="end">{{ pet.diseases }}</ion-note>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="shield-checkmark-outline" slot="start" color="success"></ion-icon>
+          <ion-label>Vacunas aplicadas</ion-label>
+          <ion-badge color="success" slot="end">{{ appliedCount }} / {{ pet.vaccines.length }}</ion-badge>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" class="ion-margin-top" (click)="goVaccines()">
+        <ion-icon name="medical-outline" slot="start"></ion-icon>
+        Ver calendario de vacunas
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="!pet" class="not-found">
+    <ion-icon name="alert-circle-outline"></ion-icon>
+    <p>No se encontró la mascota.</p>
+  </div>
+</ion-content>
