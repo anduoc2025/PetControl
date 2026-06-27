@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PetService, Pet } from '../services/pet.service';
@@ -10,7 +9,7 @@ import { PetService, Pet } from '../services/pet.service';
   standalone: false,
 })
 export class HomePage {
-  filter = 'Todos'; // valor del ion-segment
+  filter = 'Todos';
 
   constructor(private petService: PetService, private router: Router) {}
 
@@ -24,7 +23,6 @@ export class HomePage {
     return this.petService.getUser().name;
   }
 
-  // Navegación con paso de parámetro (id)
   openDetail(pet: Pet) {
     this.router.navigate(['/pet-detail', pet.id]);
   }
@@ -35,5 +33,9 @@ export class HomePage {
 
   goProfile() {
     this.router.navigate(['/profile']);
+  }
+
+  goBreeds() {
+    this.router.navigate(['/breeds']);
   }
 }

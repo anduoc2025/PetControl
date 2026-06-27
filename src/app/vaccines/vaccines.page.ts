@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
@@ -36,7 +35,7 @@ export class VaccinesPage {
       t.present();
       return;
     }
-    this.petService.addVaccine(this.pet.id, {
+    await this.petService.addVaccine(this.pet.id, {
       name: this.newName.trim(),
       date: this.newDate,
       applied: new Date(this.newDate) <= new Date(),

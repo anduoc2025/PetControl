@@ -9,7 +9,6 @@
 
 <ion-content class="ion-padding">
   <form [formGroup]="petForm" (ngSubmit)="save()">
-    <!-- Selector de foto (emoji) -->
     <ion-label class="field-label">Foto</ion-label>
     <div class="emoji-row">
       <button
@@ -74,6 +73,15 @@
         ></ion-textarea>
       </ion-item>
     </ion-list>
+
+    <!-- PLUGIN DE GEOLOCALIZACIÓN -->
+    <ion-button expand="block" fill="outline" class="ion-margin-top" type="button" (click)="getLocation()" [disabled]="gettingLocation">
+      <ion-icon name="location-outline" slot="start"></ion-icon>
+      {{ gettingLocation ? 'Obteniendo...' : 'Registrar ubicación (GPS)' }}
+    </ion-button>
+    <ion-note color="success" class="loc" *ngIf="lat !== undefined">
+      Ubicación: {{ lat | number: '1.4-4' }}, {{ lng | number: '1.4-4' }}
+    </ion-note>
 
     <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="petForm.invalid">
       <ion-icon name="save-outline" slot="start"></ion-icon>

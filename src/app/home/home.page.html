@@ -2,6 +2,9 @@
   <ion-toolbar color="primary">
     <ion-title>Mis Mascotas</ion-title>
     <ion-buttons slot="end">
+      <ion-button (click)="goBreeds()">
+        <ion-icon slot="icon-only" name="search-circle-outline"></ion-icon>
+      </ion-button>
       <ion-button (click)="goProfile()">
         <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
@@ -10,25 +13,21 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Interpolación: saludo con el nombre del usuario -->
-  <h2 class="greeting">¡Hola, {{ userName }}! 👋</h2>
+  <h2 class="greeting">¡Hola, {{ userName }}! </h2>
   <p class="subtitle">Estas son tus mascotas registradas.</p>
 
-  <!-- ion-segment: filtro por especie -->
   <ion-segment [(ngModel)]="filter" scrollable>
     <ion-segment-button value="Todos"><ion-label>Todos</ion-label></ion-segment-button>
     <ion-segment-button value="Perro"><ion-label>Perros</ion-label></ion-segment-button>
     <ion-segment-button value="Gato"><ion-label>Gatos</ion-label></ion-segment-button>
   </ion-segment>
 
-  <!-- Lista de tarjetas (ion-card) generada con *ngFor -->
   <ion-card *ngFor="let pet of pets" button (click)="openDetail(pet)" class="pet-card">
     <ion-card-content class="pet-row">
       <div class="pet-avatar">{{ pet.photo }}</div>
       <div class="pet-info">
         <h3>{{ pet.name }}</h3>
         <p>{{ pet.breed }} · {{ pet.age }} año(s)</p>
-        <!-- ion-chip: especie y sexo -->
         <ion-chip color="primary" outline>{{ pet.species }}</ion-chip>
         <ion-chip [color]="pet.sex === 'Macho' ? 'tertiary' : 'secondary'" outline>{{ pet.sex }}</ion-chip>
       </div>
@@ -41,7 +40,6 @@
     <p>No hay mascotas en esta categoría.</p>
   </div>
 
-  <!-- ion-fab: botón flotante para agregar mascota -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="secondary" (click)="addPet()">
       <ion-icon name="add"></ion-icon>

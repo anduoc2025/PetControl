@@ -33,7 +33,10 @@ export class ProfilePage {
         {
           text: 'Salir',
           role: 'destructive',
-          handler: () => this.router.navigate(['/login']),
+          handler: async () => {
+            await this.petService.logout();
+            this.router.navigate(['/login']);
+          },
         },
       ],
     });

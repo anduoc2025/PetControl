@@ -58,7 +58,7 @@ export class LoginPage implements AfterViewInit {
       return;
     }
     const { email, password } = this.loginForm.value;
-    if (this.petService.login(email, password)) {
+    if (await this.petService.login(email, password)) {
       this.router.navigate(['/home']);
     } else {
       const toast = await this.toastCtrl.create({

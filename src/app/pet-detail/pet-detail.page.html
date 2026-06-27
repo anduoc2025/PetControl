@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content class="ion-padding carnet-bg">
-  <!-- Tarjeta del carnet (se anima al entrar) -->
   <ion-card #carnet class="carnet" *ngIf="pet">
     <div class="carnet-head">
       <ion-avatar class="carnet-avatar">
@@ -20,7 +19,6 @@
     </div>
 
     <ion-card-content>
-      <!-- Datos en lista (interpolación) -->
       <ion-list lines="full">
         <ion-item>
           <ion-icon name="paw-outline" slot="start" color="primary"></ion-icon>
@@ -51,6 +49,11 @@
           <ion-icon name="shield-checkmark-outline" slot="start" color="success"></ion-icon>
           <ion-label>Vacunas aplicadas</ion-label>
           <ion-badge color="success" slot="end">{{ appliedCount }} / {{ pet.vaccines.length }}</ion-badge>
+        </ion-item>
+        <ion-item lines="none" *ngIf="pet.lat">
+          <ion-icon name="location-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Ubicación</ion-label>
+          <ion-note slot="end">{{ pet.lat | number: '1.3-3' }}, {{ pet.lng | number: '1.3-3' }}</ion-note>
         </ion-item>
       </ion-list>
 
