@@ -29,7 +29,7 @@ export class PetService {
   private defaultPets: Pet[] = [
     {
       id: 1, name: 'Luna', species: 'Perro', breed: 'Quiltro', age: 0.4,
-      sex: 'Macho', color: 'Blanco con cafr', diseases: 'Alergia a las pulgas', photo: '🐶',
+      sex: 'Hembra', color: 'Blanco con cafr', diseases: 'Alergia a las pulgas', photo: '🐶',
       vaccines: [
         { name: 'Antirrábica', date: '2025-03-10', applied: true },
         { name: 'Sextuple', date: '2025-04-15', applied: true },
