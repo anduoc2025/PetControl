@@ -44,27 +44,60 @@ export class AddPetPage {
     this.petForm.patchValue({ photo: e });
   }
 
-  // ===== PLUGIN DE GEOLOCALIZACIÓN =====
+  // ===== PLUGIN DE GEOLOCALIZACIÓN (con manejo de escenarios) =====
   async getLocation() {
     this.gettingLocation = true;
     try {
-      const pos = await Geolocation.getCurrentPosition();
-      this.lat = pos.coords.latitude;
-      this.lng = pos.coords.longitude;
-      const t = await this.toastCtrl.create({
-        message: 'Ubicación obtenida correctamente 📍',
-        duration: 1800, color: 'success', position: 'top',
+      // 1) Verificar y pedir permisos primero
+      const permiso = await Geolocation.checkPermissions();
+      if (permiso.location === 'denied') {
+        const nuevoPermiso = await Geolocation.requestPermissions();
+        if (nuevoPermiso.location === 'denied') {
+          await this.mostrarMensaje('Permiso de ubicación denegado. Actívalo para usar el GPS.', 'warning');
+          this.gettingLocation = false;
+          return;
+        }
+      }
+
+      // 2) Obtener la ubicación con un tiempo límite (por si el GPS se demora)
+      const pos = await Geolocation.getCurrentPosition({
+        enableHighAccuracy: true,
+        timeout: 10000, // 10 segundos máximo
       });
-      t.present();
-    } catch (e) {
-      const t = await this.toastCtrl.create({
-        message: 'No se pudo obtener la ubicación. Revisa los permisos.',
-        duration: 2200, color: 'danger', position: 'top',
-      });
-      t.present();
+
+      // 3) Validar que las coordenadas sean correctas
+      if (pos && pos.coords && pos.coords.latitude) {
+        this.lat = pos.coords.latitude;
+        this.lng = pos.coords.longitude;
+        await this.mostrarMensaje('Ubicación obtenida correctamente 📍', 'success');
+      } else {
+        await this.mostrarMensaje('No se pudieron obtener coordenadas válidas.', 'danger');
+      }
+    } catch (error: any) {
+      // 4) Manejo específico según el tipo de error
+      if (error?.message?.includes('timeout')) {
+        await this.mostrarMensaje('El GPS tardó demasiado. Intenta de nuevo en un lugar con mejor señal.', 'warning');
+      } else if (error?.message?.includes('denied') || error?.code === 1) {
+        await this.mostrarMensaje('Permiso de ubicación denegado.', 'warning');
+      } else if (error?.code === 2) {
+        await this.mostrarMensaje('GPS no disponible en este dispositivo.', 'danger');
+      } else {
+        await this.mostrarMensaje('No se pudo obtener la ubicación. Revisa el GPS y los permisos.', 'danger');
+      }
     } finally {
       this.gettingLocation = false;
     }
+  }
+
+  // Función auxiliar para mostrar mensajes (evita repetir código)
+  private async mostrarMensaje(mensaje: string, color: string) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      duration: 2500,
+      color: color,
+      position: 'top',
+    });
+    toast.present();
   }
 
   async save() {
