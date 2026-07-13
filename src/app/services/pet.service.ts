@@ -24,24 +24,21 @@ export interface Pet {
 
 @Injectable({ providedIn: 'root' })
 export class PetService {
-  private user = { email: 'demo@petcontrol.cl', password: '123456', name: ' Andres Barra' };
+  private user = { email: 'demo@petcontrol.cl', password: '123456', name: 'Andres Barra' };
 
   private defaultPets: Pet[] = [
     {
       id: 1, name: 'Luna', species: 'Perro', breed: 'Quiltro', age: 0.4,
-      sex: 'Hembra', color: 'Blanco con cafr', diseases: 'Alergia a las pulgas', photo: '🐶',
+      sex: 'Hembra', color: 'Blanco con café', diseases: 'Alergia a las pulgas', photo: '🐶',
       vaccines: [
         { name: 'Antirrábica', date: '2025-03-10', applied: true },
-        { name: 'Sextuple', date: '2025-04-15', applied: true },
-        { name: 'Refuerzo anual', date: '2026-03-10', applied: false },
       ],
     },
     {
-      id: 2, name: 'Touka', species: 'Gato', breed: 'Romano', age: 4 ,
-      sex: 'Hembra', color: 'Crema', diseases: 'Ninguna', photo: '🐱',
+      id: 2, name: 'Touka', species: 'Gato', breed: 'Romano', age: 4,
+      sex: 'Hembra', color: 'Negro', diseases: 'Ninguna', photo: '🐱',
       vaccines: [
         { name: 'Triple felina', date: '2025-05-20', applied: true },
-        { name: 'Antirrábica', date: '2026-05-20', applied: true },
       ],
     },
   ];
@@ -66,7 +63,6 @@ export class PetService {
     await this.storageService.set('pets', this.pets);
   }
 
-  // ===== Autenticación con sesión persistida (para el Route Guard) =====
   async login(email: string, password: string): Promise<boolean> {
     const ok = email === this.user.email && password === this.user.password;
     if (ok) {
@@ -92,7 +88,6 @@ export class PetService {
     this.user = { name, email, password };
   }
 
-  // ===== CRUD de mascotas (ahora persistido) =====
   getPets(): Pet[] {
     return this.pets;
   }
