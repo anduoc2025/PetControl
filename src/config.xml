@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="cl.petcontrol.app"
+        version="2.0.0"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
+  <name>PetControl</name>
+  <description>Carnet digital de salud para mascotas: fichas, vacunas e historial.</description>
+  <author email="tucorreo@ejemplo.cl" href="https://github.com/tu-usuario/petcontrol">
+    Andrés - Estudiante PGY4221
+  </author>
+
+  <content src="index.html" />
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+
+  <platform name="android">
+    <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-targetSdkVersion" value="34" />
+  </platform>
+
+  <platform name="ios">
+    <preference name="deployment-target" value="13.0" />
+  </platform>
+
+  <preference name="Orientation" value="portrait" />
+  <preference name="Fullscreen" value="false" />
+</widget>
